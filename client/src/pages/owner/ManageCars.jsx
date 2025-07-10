@@ -9,7 +9,6 @@ const ManageCars = () => {
 
     const fetchOwnerCars = async () => {
         setCars(dummyCarData)
-        console.log(cars)
     }
 
     useEffect(() => {
