@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 // Connect to the database
-await connectDB();
+connectDB();
 
 // Middleware
 app.use(cors());
@@ -28,5 +28,3 @@ app.use("/api/owner", ownerRouter);
 app.use("/api/bookings", bookingRouter);
 
 app.listen(PORT, () => console.log(`SUCCESS: Server is running on port ${PORT}`));
-
-export default app;
