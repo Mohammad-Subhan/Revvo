@@ -1,10 +1,10 @@
 import express from "express"
 import "dotenv/config"
 import cors from "cors"
-import connectDB from "../config/database.js"
-import userRouter from "../routes/userRoutes.js"
-import ownerRouter from "../routes/ownerRoutes.js"
-import bookingRouter from "../routes/bookingRoutes.js"
+import connectDB from "./config/database.js"
+import userRouter from "./routes/userRoutes.js"
+import ownerRouter from "./routes/ownerRoutes.js"
+import bookingRouter from "./routes/bookingRoutes.js"
 
 // PORT configuration
 const PORT = process.env.PORT || 3000;
