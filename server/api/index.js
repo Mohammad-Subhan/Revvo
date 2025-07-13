@@ -8,30 +8,30 @@ import bookingRouter from "../routes/bookingRoutes.js"
 import serverless from "serverless-http"
 
 // PORT configuration
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
 // Initialize the express app
 const app = express();
 
 // Connect to the database
-app.use(async (req, res, next) => {
-    await connectDB();
-    next();
-});
-
+const connect = async () => {
+    try {
+        await connectDB();
+    } catch (err) {
+        console.error("Database connection failed:", err);
+    }
+};
+await connect();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// Server check route
+// Routes
 app.get("/", (req, res) => res.send("Server is running!"));
-
-// User routes
 app.use("/api/user", userRouter);
 app.use("/api/owner", ownerRouter);
 app.use("/api/bookings", bookingRouter);
 
 // app.listen(PORT, () => console.log(`SUCCESS: Server is running on port ${PORT}`));
-
 export const handler = serverless(app);
