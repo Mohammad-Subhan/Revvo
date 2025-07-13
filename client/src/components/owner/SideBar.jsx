@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import { assets, dummyUserData } from '../../assets/assets'
-import { NavLink, useLocation } from 'react-router-dom'
+import { assets } from '../../assets/assets'
+import { Form, NavLink, useLocation } from 'react-router-dom'
+import { useAppContext } from "../../context/AppContext"
+import toast from 'react-hot-toast'
 
 const ownerMenuLinks = [
     { name: "Dashboard", path: "/owner", icon: assets.dashboardIcon, coloredIcon: assets.dashboardIconColored },
@@ -11,13 +13,28 @@ const ownerMenuLinks = [
 
 const SideBar = () => {
 
-    const user = dummyUserData
+    const { user, axios, fetchUser } = useAppContext();
     const location = useLocation()
     const [image, setImage] = useState("")
 
     const updateImage = async () => {
-        user.image = URL.createObjectURL(image)
-        setImage("")
+        try {
+            const formData = new FormData();
+            formData.append("image", image);
+
+            const response = await axios.post("/api/owner/update-image", formData);
+            const { data } = response;
+
+            if (data.success) {
+                fetchUser();
+                toast.success(data.message);
+                setImage("");
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
     }
 
     return (
@@ -34,7 +51,7 @@ const SideBar = () => {
             </div>
 
             {image && (
-                <button className="absolute top-0 right-0 flex p-2 gap-1 bg-primary/10 text-primary cursor-pointer">Save <img src={assets.check_icon} width={13} onClick={updateImage} alt="" /></button>
+                <button className="absolute top-0 right-0 flex p-2 gap-1 bg-primary/10 text-primary cursor-pointer" onClick={updateImage}>Save <img src={assets.check_icon} width={13} alt="" /></button>
             )}
             <p className="mt-2 text-base max-md:hidden">{user?.name}</p>
 

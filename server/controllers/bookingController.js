@@ -29,7 +29,7 @@ const checkAvailableCars = async (req, res) => {
 
         return res.json({
             success: true,
-            cars: availableCars,
+            availableCars,
         });
 
     } catch (error) {
