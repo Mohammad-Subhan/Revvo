@@ -5,10 +5,9 @@ import connectDB from "../config/database.js"
 import userRouter from "../routes/userRoutes.js"
 import ownerRouter from "../routes/ownerRoutes.js"
 import bookingRouter from "../routes/bookingRoutes.js"
-import serverless from "serverless-http"
 
 // PORT configuration
-// const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 // Initialize the express app
 const app = express();
@@ -28,5 +27,4 @@ app.use("/api/user", userRouter);
 app.use("/api/owner", ownerRouter);
 app.use("/api/bookings", bookingRouter);
 
-// app.listen(PORT, () => console.log(`SUCCESS: Server is running on port ${PORT}`));
-export const handler = serverless(app);
+app.listen(PORT, () => console.log(`SUCCESS: Server is running on port ${PORT}`)); 
