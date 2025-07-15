@@ -5,7 +5,6 @@ import connectDB from "../config/database.js"
 import userRouter from "../routes/userRoutes.js"
 import ownerRouter from "../routes/ownerRoutes.js"
 import bookingRouter from "../routes/bookingRoutes.js"
-import serverless from "serverless-http"
 
 // PORT configuration
 const PORT = process.env.PORT || 3000;
@@ -21,7 +20,7 @@ app.use(cors());
 app.use(express.json());
 
 // Server check route
-app.get("/", (req, res) => res.send("Server is running!"));
+app.get("/api/", (req, res) => res.send("Server is running!"));
 
 // User routes
 app.use("/api/user", userRouter);
