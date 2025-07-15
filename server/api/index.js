@@ -29,6 +29,5 @@ app.use("/api/owner", ownerRouter);
 app.use("/api/bookings", bookingRouter);
 
 app.listen(PORT, () => console.log(`SUCCESS: Server is running on port ${PORT}`));
-const handler = serverless(app);
-export default handler;
-export { handler };
+export default app;
+export { app };
