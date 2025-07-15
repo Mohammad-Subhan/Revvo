@@ -27,4 +27,6 @@ app.use("/api/user", userRouter);
 app.use("/api/owner", ownerRouter);
 app.use("/api/bookings", bookingRouter);
 
-app.listen(PORT, () => console.log(`SUCCESS: Server is running on port ${PORT}`)); 
+app.listen(PORT, () => console.log(`SUCCESS: Server is running on port ${PORT}`));
+export default app;
+export { app };
